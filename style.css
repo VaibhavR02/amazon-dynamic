@@ -1,0 +1,179 @@
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialised;
+  -moz-osx-font-smoothing: grayscale;
+}
+* {
+  padding: 0;
+  margin: 0;
+
+  box-sizing: border-box;
+}
+
+* a {
+  text-decoration: none;
+  color: #000000;
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Coirier New',
+    monospace;
+}
+/* @media (min-width: 2px) {
+  .navbar-expand-lg .navbar-collapse {
+    display: flex;
+    flex-basis: auto;
+  }
+} */
+
+/* header {
+  padding: 1rem;
+} */
+
+header .navbar-brand {
+  color: #ffffff;
+  font-weight: bold;
+  text-decoration: none;
+  margin-left: 5rem;
+}
+header .navbar-brand:hover {
+  color: #ffffff;
+}
+
+main {
+  flex: 1;
+}
+
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  max-height: 750px;
+}
+
+.products-info {
+  padding: 1rem;
+}
+
+.product {
+  border: 1px #404040 solid;
+  margin: 1rem;
+}
+
+.product img {
+  width: 100%;
+  max-width: 400px;
+  max-height: 350px;
+}
+
+.product button {
+  background-color: #f0c040;
+  border: none;
+  border-radius: 3px;
+  color: black;
+  font-weight: bold;
+}
+header nav .btn-outline-warning {
+  background-color: #f0c040;
+  color: #000000;
+  border-radius: 0;
+}
+
+.btn-p {
+  background-color: #f0c040;
+  border-color: none;
+}
+
+.btn-p:hover {
+  background-color: #1e39d4;
+}
+
+nav .dropdown-menu {
+  margin-left: 220px;
+}
+
+header nav .form-control {
+  border-radius: 0px;
+  margin-left: 780px;
+  width: 50%;
+}
+
+.site-container {
+  min-height: 63vh;
+}
+
+.rating span {
+  font-weight: 800;
+  color: #ffc800;
+}
+
+/* ----------------sidebar-------------------------------------- */
+.sidepanel {
+  height: auto; /* Specify a height */
+  width: 0; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  top: 0;
+  left: 0;
+  padding-bottom: 20px;
+
+  background-color: rgb(33, 37, 41);
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 60px; /* Place content 60px from the top */
+  transition: 0.2s; /* 0.5 second transition effect to slide in the sidepanel */
+}
+
+/* The sidepanel links */
+.sidepanel a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 20px;
+
+  color: #fff;
+  display: block;
+  transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidepanel a:hover {
+  color: #dad7d7;
+}
+
+/* Position and style the close button (top right corner) */
+.sidepanel .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+/* Style the button that is used to open the sidepanel */
+.openbtn {
+  font-size: 20px;
+  cursor: pointer;
+  /* background-color: #404040; */
+  color: white;
+  padding: 10px 15px;
+  border: none;
+}
+.sidepanel h3 {
+  color: white;
+  margin-bottom: 5px;
+  margin-left: 17px;
+}
+
+.openbtn:hover {
+  background-color: rgb(255, 255, 255);
+}
+/* ----------------sidebar-------------------------------------- */
+
+.img-thumbnail {
+  height: 80px;
+}
+
+.small-container {
+  max-width: 600px;
+}
