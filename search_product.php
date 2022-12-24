@@ -48,7 +48,7 @@ include('includes/connect.php');
                 <li><a class="dropdown-item " href="#">Orders</a></li>
                 <li><a class="dropdown-item " href="#">Action</a></li>
                 <li><a class="dropdown-item" href="#">Profile</a></li>
-                <li><a class="dropdown-item" href="#">Log out</a></li>
+                <li><a class="dropdown-item" href="./user/SigninScreen.php">Log in</a></li>
             </ul>
             </span>
             </li>
@@ -121,25 +121,15 @@ Featured Products
 </span>
 </div>
 <p class='card-text'>Price : ₹$product_price</p>
-<a href='#' class='btn btn-warning btn-sm'>Add to Cart</a>
+
+<a href='index.php?add_to_cart=$product_id' class='btn btn-warning btn-sm'>Add to Cart</a>
+
   </div>
 </div>
 </div>  ";
   }  
 }}
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     <div id="mySidepanel" class="sidepanel">
@@ -171,10 +161,35 @@ while($row_data=mysqli_fetch_assoc($result_cat)){
 
 
 
-    <!-- ---------------------------------------html end--------------------------------------------------------------------------- -->
+    <!-- ---------------------------------------cart function--------------------------------------------------------------------------- -->
+    <?php
+
+            
+if(isset($_GET['add_to_cart'])){
+    $get_ip_address=getIPAddress();
+    $get_product_id=$_GET['add_to_cart'];
+    
+    $select_query="Select * from `cart_details` where ip_address= '$get_ip_address' and
+     product_id=$get_product_id";
+     $result_query=mysqli_query($connection,$select_query);
+     $num_of_rows=mysqli_num_rows($result_query);
+if($num_of_rows>0){
+    echo "<script>alert('This item already inside cart')</script>";
+    echo "<script>window.open('productview.php','_self')</script>";
+}else{
+$insert_query="Insert into `cart_details` 
+(product_id,ip_address,quantity) Values ($get_product_id,'$get_ip_address',0)";
+$result_query=mysqli_query($connection,$insert_query);
+echo "<script>alert('Item added to cart')</script>";
+   
+echo "<script>window.open('productview.php','_self')</script>";
 
 
-    <!-- ---------------------------------------html end--------------------------------------------------------------------------- -->
+}
+}
+?>
+
+    <!-- ---------------------------------------cart function--------------------------------------------------------------------------- -->
 
 
 

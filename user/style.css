@@ -21,15 +21,15 @@ code {
     monospace;
 }
 /* @media (min-width: 2px) {
-  .navbar-expand-lg .navbar-collapse {
-    display: flex;
-    flex-basis: auto;
-  }
-} */
+    .navbar-expand-lg .navbar-collapse {
+      display: flex;
+      flex-basis: auto;
+    }
+  } */
 
 /* header {
-  padding: 1rem;
-} */
+    padding: 1rem;
+  } */
 
 header .navbar-brand {
   color: #ffffff;

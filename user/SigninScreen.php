@@ -1,3 +1,8 @@
+<?php
+include('../includes/connect.php');
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +23,7 @@
 
     <div class="container small-container">
         <title>Sign In</title>
-        <h1 class="my-3">Sign In</h1>
+        <h1 class="my-3 text-center">Sign In</h1>
         <form action="">
             <div class="form-group mb-3" id="email">
                 <label for="email" class="form-label">Email</label>
@@ -29,11 +34,14 @@
                 <label for="password" class="form-label">Password</label>
                 <input type="password" class="form-control" id="password" placeholder="Enter password">
             </div>
+            <div class="mb-3 "><a href="" class=" text-primary text-decoration-underline">Forgot Password?</a></div>
             <div class="mb-3">
                 <a href="" class="btn btn-p">Sign In</a>
+
             </div>
-            <div class="mb-3">
-                New Customer?&nbsp; <a href="SignupScreen.php" class="text-primary"> Create new account</a>
+            <div class="mb-3 fw-bold ">
+                New Customer?&nbsp; <a href="SignupScreen.php" class="text-primary text-decoration-underline"> Create
+                    new account</a>
             </div>
         </form>
     </div>

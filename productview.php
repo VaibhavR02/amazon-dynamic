@@ -27,6 +27,10 @@ include('includes/connect.php');
     </title>
 
     <style>
+    header .navbar-brand {
+        margin-left: 0px
+    }
+
     .footer {
         margin-top: 370px;
 
@@ -45,28 +49,50 @@ include('includes/connect.php');
 <body>
 
     <header>
-        <nav class="navbar  navbar-expand-lg variant-dark bg-dark">
+        <nav class="navbar  navbar-expand-lg  variant-dark bg-dark">
             <li><button class="openbtn bg-dark" onclick="openNav()">☰</button>
-                <a class="navbar-brand ms-3 bg-dark" href="/ecommerse/index.php"> amazon</a>
+                <a class="navbar-brand  bg-dark" href="/ecommerse/index.php"> amazon</a>
 
-                <span class="dropdown ">
+            <li class="nav  text-white  text-white">
+                <a class="nav-link active  text-white" aria-current="page" href="cartscreen.php">
+                    <i class='fas fa-shopping-cart position-relative' style='font-size:17px '>
+                        <span style='font-size:10px'
+                            class="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-danger">
+                            <?php
+    if(isset($_GET['add_to_cart'])){
+        $get_ip_address=getIPAddress();
+       $select_query="Select * from `cart_details` where ip_address= '$get_ip_address' ";
+         $result_query=mysqli_query($connection,$select_query);
+         $cart_items=mysqli_num_rows($result_query);
+     } else{
+    $get_ip_address=getIPAddress();
+       $select_query="Select * from `cart_details` where ip_address= '$get_ip_address' ";
+         $result_query=mysqli_query($connection,$select_query);
+         $cart_items=mysqli_num_rows($result_query);
+    }
+    echo "$cart_items";
+    
 
-            <li class="nav  text-white   text-white">
-                <a class="nav-link active  text-white" aria-current="page" href="Cart.php"><i
-                        class='fas fa-shopping-cart' style='font-size:17px '></i></a>
+           ?>
+                        </span>
+                    </i></a>
+
             </li>
 
-            <a class=" text-white text-decoration-none  dropdown-toggle " href="#" role="button" id="dropdownMenuLink"
-                data-bs-toggle="dropdown" aria-expanded="false">
-                User
-            </a>
+            <span class="dropdown ">
 
-            <ul class="dropdown-menu  " aria-labelledby="dropdownMenuLink">
-                <li><a class="dropdown-item " href="#">Orders</a></li>
-                <li><a class="dropdown-item " href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Profile</a></li>
-                <li><a class="dropdown-item" href="#">Log out</a></li>
-            </ul>
+
+                <a class=" text-white text-decoration-none ms-3  dropdown-toggle " href="#" role="button"
+                    id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    User
+                </a>
+
+                <ul class="dropdown-menu " aria-labelledby="dropdownMenuLink">
+                    <li><a class="dropdown-item " href="#">Orders</a></li>
+                    <li><a class="dropdown-item " href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li><a class="dropdown-item" href="./user/SigninScreen.php">Sign in</a></li>
+                </ul>
             </span>
             </li>
             <form class="d-flex " action="search_product.php" method="get" role="search">
@@ -77,6 +103,77 @@ include('includes/connect.php');
             </form>
         </nav>
     </header>
+
+
+
+    <!-- ------------------------------------------------------------------------- -->
+    <?php  
+    function getIPAddress() {  
+    //whether ip is from the share internet  
+     if(!empty($_SERVER['HTTP_CLIENT_IP'])) {  
+                $ip = $_SERVER['HTTP_CLIENT_IP'];  
+        }  
+    //whether ip is from the proxy  
+    elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {  
+                $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];  
+     }  
+//whether ip is from the remote address  
+    else{  
+             $ip = $_SERVER['REMOTE_ADDR'];  
+     }  
+     return $ip;  
+}  
+// $ip = getIPAddress();  
+// echo 'User  IP Address - '.$ip;  
+?>
+    <!-- ------------------------------------------------------------------------- -->
+
+    <!-- // --------------------adding in cart---------------------------------------------- -->
+    <?php
+    if(isset($_GET['add_to_cart'])){
+    $get_ip_address=getIPAddress();
+    $get_product_id=$_GET['add_to_cart'];
+    
+    $select_query="Select * from `cart_details` where ip_address= '$get_ip_address' and
+     product_id=$get_product_id";
+     $result_query=mysqli_query($connection,$select_query);
+     $num_of_rows=mysqli_num_rows($result_query);
+if($num_of_rows>0){
+    echo "<script>alert('This item already inside cart')</script>";
+    echo "<script>window.open('productview.php','_self')</script>";
+}else{
+$insert_query="Insert into `cart_details` 
+(product_id,ip_address,quantity) Values ($get_product_id,'$get_ip_address',0)";
+$result_query=mysqli_query($connection,$insert_query);
+echo "<script>alert('Item added to cart')</script>";
+   
+echo "<script>window.open('cartscreen.php','_self')</script>";
+
+
+}
+}
+?>
+
+    <!-- ------------------------adding in cart------------------------------------------ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     <!-- --------------------------------------------------------- -->
@@ -152,7 +249,9 @@ if(isset($_GET['product_id'])){
    <li class='list-group-item'>
 
   <div class='d-grid'>
-  <a href='cartscreen.php'> <div class='btn btn-warning mt-3' type='submit'  variant='primary'>Proceed to Checkout</div></a>
+  
+  
+  <a href='cartscreen.php?add_to_cart=$product_id'> <div class='btn btn-warning mt-3 ms-4' type='submit'  variant='primary'>Add to Cart </div></a>
   </div>
    
   
@@ -170,7 +269,32 @@ if(isset($_GET['product_id'])){
 
 
     <!-- ------------------------------------------------------------------ -->
+    <?php
 
+            
+if(isset($_GET['add_to_cart'])){
+    $get_ip_address=getIPAddress();
+    $get_product_id=$_GET['add_to_cart'];
+    
+    $select_query="Select * from `cart_details` where ip_address= '$get_ip_address' and
+     product_id=$get_product_id";
+     $result_query=mysqli_query($connection,$select_query);
+     $num_of_rows=mysqli_num_rows($result_query);
+if($num_of_rows>0){
+    echo "<script>alert('This item already inside cart')</script>";
+    echo "<script>window.open('cartscreen.php')</script>";
+}else{
+$insert_query="Insert into `cart_details` 
+(product_id,ip_address,quantity) Values ($get_product_id,'$get_ip_address',0)";
+$result_query=mysqli_query($connection,$insert_query);
+echo "<script>alert('Item added to cart')</script>";
+   
+echo "<script>window.open('cartscreen.php')</script>";
+
+
+}
+}
+?>
 
 
     <!-- ------------------------------------------------------------------ -->

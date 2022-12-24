@@ -21,6 +21,7 @@ echo "<script>alert('category is already presnt')</script>";
 
 
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -31,21 +32,23 @@ echo "<script>alert('category is already presnt')</script>";
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
+
 <body class="bg=light">
     <div class="container mt-3">
         <h1 class="text-center ">Insert Category</h1>
-<form action="" method="post" >
-<div class="form-outline mb-4 w-50 m-auto mt-3">
+        <form action="" method="post">
+            <div class="form-outline mb-4 w-50 m-auto mt-3">
 
-    <label for="cat_name" class="form-label" > Category Name</label>
-    
-    <input type="text" name="cat_name" id="cat_name" 
-    class="form-control " placeholder="Enter Category name" 
-    autocomplete="off" required>
+                <label for="cat_name" class="form-label"> Category Name</label>
 
-    <div class="form-outline mb-4 w-50  mt-3">
- <input type="submit" name="insert_category" class="btn btn-warning btn-sm m-auto" value="Insert Category">
-</div>
-</div>
+                <input type="text" name="cat_name" id="cat_name" class="form-control " placeholder="Enter Category name"
+                    autocomplete="off" required>
+
+                <div class="form-outline mb-4 w-50  mt-3">
+                    <input type="submit" name="insert_category" class="btn btn-warning btn-sm m-auto"
+                        value="Insert Category">
+                </div>
+            </div>
 </body>
+
 </html>

@@ -41,7 +41,22 @@ include('includes/connect.php');
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
+
+    <style>
+    header .navbar-brand {
+        margin-left: 0px
+    }
+
+    .dropdown-menu[data-bs-popper] {
+        top: 100%;
+        left: -213px;
+        margin-top: var(--bs-dropdown-spacer);
+    }
+    </style>
+
 </head>
+
 
 <body>
 
@@ -51,26 +66,48 @@ include('includes/connect.php');
     <header>
         <nav class="navbar  navbar-expand-lg  variant-dark bg-dark">
             <li><button class="openbtn bg-dark" onclick="openNav()">☰</button>
-                <a class="navbar-brand ms-3 bg-dark" href="/ecommerse/index.php"> amazon</a>
+                <a class="navbar-brand  bg-dark" href="/ecommerse/index.php"> amazon</a>
 
-                <span class="dropdown ">
+            <li class="nav  text-white  text-white">
+                <a class="nav-link active  text-white" aria-current="page" href="cartscreen.php">
+                    <i class='fas fa-shopping-cart position-relative' style='font-size:17px '>
+                        <span style='font-size:10px'
+                            class="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-danger">
+                            <?php
+    if(isset($_GET['add_to_cart'])){
+        $get_ip_address=getIPAddress();
+       $select_query="Select * from `cart_details` where ip_address= '$get_ip_address' ";
+         $result_query=mysqli_query($connection,$select_query);
+         $cart_items=mysqli_num_rows($result_query);
+     } else{
+    $get_ip_address=getIPAddress();
+       $select_query="Select * from `cart_details` where ip_address= '$get_ip_address' ";
+         $result_query=mysqli_query($connection,$select_query);
+         $cart_items=mysqli_num_rows($result_query);
+    }
+    echo "$cart_items";
+    
 
-            <li class="nav  text-white   text-white">
-                <a class="nav-link active  text-white" aria-current="page" href="Cart.php"><i
-                        class='fas fa-shopping-cart' style='font-size:17px '></i></a>
+           ?>
+                        </span>
+                    </i></a>
+
             </li>
 
-            <a class=" text-white text-decoration-none  dropdown-toggle " href="#" role="button" id="dropdownMenuLink"
-                data-bs-toggle="dropdown" aria-expanded="false">
-                User
-            </a>
+            <span class="dropdown ">
 
-            <ul class="dropdown-menu  " aria-labelledby="dropdownMenuLink">
-                <li><a class="dropdown-item " href="#">Orders</a></li>
-                <li><a class="dropdown-item " href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Profile</a></li>
-                <li><a class="dropdown-item" href="#">Log out</a></li>
-            </ul>
+
+                <a class=" text-white text-decoration-none ms-3  dropdown-toggle " href="#" role="button"
+                    id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    User
+                </a>
+
+                <ul class="dropdown-menu my-2 " aria-labelledby="dropdownMenuLink">
+                    <li><a class="dropdown-item " href="#">Orders</a></li>
+                    <li><a class="dropdown-item " href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li><a class="dropdown-item" href="./user/checkout.php">Log in</a></li>
+                </ul>
             </span>
             </li>
             <form class="d-flex " action="search_product.php" method="get" role="search">
@@ -241,7 +278,7 @@ while($row_data=mysqli_fetch_assoc($result_cat)){
     </span>
     </div>
     <p class='card-text'>Price : ₹$product_price</p>
-    <a href='#' class='btn btn-warning btn-sm'>Add to Cart</a>
+    <a href='index.php?add_to_cart=$product_id' class='btn btn-warning btn-sm'>Add to Cart</a>
       </div>
     </div>
     </div>  ";
@@ -298,6 +335,54 @@ while($row_data=mysqli_fetch_assoc($result_cat)){
 
 
 
+
+            <!-- // --------------------adding in cart---------------------------------------------- -->
+            <?php
+    if(isset($_GET['add_to_cart'])){
+    $get_ip_address=getIPAddress();
+    $get_product_id=$_GET['add_to_cart'];
+    
+    $select_query="Select * from `cart_details` where ip_address= '$get_ip_address' and
+     product_id=$get_product_id";
+     $result_query=mysqli_query($connection,$select_query);
+     $num_of_rows=mysqli_num_rows($result_query);
+if($num_of_rows>0){
+    echo "<script>alert('This item already inside cart')</script>";
+    echo "<script>window.open('index.php','_self')</script>";
+}else{
+$insert_query="Insert into `cart_details` 
+(product_id,ip_address,quantity) Values ($get_product_id,'$get_ip_address',0)";
+$result_query=mysqli_query($connection,$insert_query);
+echo "<script>alert('Item added to cart')</script>";
+   
+echo "<script>window.open('index.php','_self')</script>";
+
+
+}
+}
+?>
+
+            <!-- ------------------------adding in cart------------------------------------------ -->
+
+
+            <!-- ------------------------------------cart items------------------------------ -->
+            <?php
+    if(isset($_GET['add_to_cart'])){
+        $get_ip_address=getIPAddress();
+       $select_query="Select * from `cart_details` where ip_address= '$get_ip_address' ";
+         $result_query=mysqli_query($connection,$select_query);
+         $cart_items=mysqli_num_rows($result_query);
+     } else{
+    $get_ip_address=getIPAddress();
+       $select_query="Select * from `cart_details` where ip_address= '$get_ip_address' ";
+         $result_query=mysqli_query($connection,$select_query);
+         $cart_items=mysqli_num_rows($result_query);
+    }
+    echo "$cart_items";
+    
+
+           ?>
+            <!-- ------------------------------------cart items------------------------------ -->
 
 
             <!-- ------------------------footer start------------------------------------------------------------------------------ -->
