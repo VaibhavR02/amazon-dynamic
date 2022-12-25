@@ -1,6 +1,6 @@
 <?php
 include('../includes/connect.php');
-
+@session_start();
 
 ?>
 
@@ -23,7 +23,7 @@ include('../includes/connect.php');
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
     </script>
     <title>
-        Product view
+        Checkout
     </title>
 
     <style>
@@ -55,12 +55,48 @@ include('../includes/connect.php');
 
 
             </li>
-            <form class="d-flex " action="search_product.php" method="get" role="search">
-                <input class="ms-3 form-control justify-content-end" name="search_data" type="search"
-                    placeholder="Search Products..." aria-label="Search">
-                <!-- <button class="btn btn-outline-warning" type="submit"><i class="fas fa-search"></i></button> -->
-                <input type="submit" value="Search" name="search_product" class="btn btn-outline-warning">
-            </form>
+            <span class="dropdown ">
+                <a class='text-white text-decoration-none ms-3  dropdown-toggle' href='' role='button'
+                    id='dropdownMenuLink' data-bs-toggle='dropdown' aria-expanded='false'>User name
+                </a>
+                <ul class='dropdown-menu my-2 ' aria-labelledby='dropdownMenuLink'>
+                    <li><a class='dropdown-item ' href='#'>Orders</a></li>
+                    <li><a class='dropdown-item ' href='#'>Action</a></li>
+                    <li><a class='dropdown-item' href='#'>Profile</a></li>
+
+                    <?php
+     
+if(!isset($_SESSION['name'])){
+  echo "  
+    
+                    <li><a class='dropdown-item' href='SigninScreen.php'>Sign In</a></li>
+                </ul>
+            </span>
+";
+}else{
+    echo "  
+    
+                    <li><a class='dropdown-item' href='SignoutScreen.php'>Sign out</a></li>
+                </ul>
+            </span>
+";
+}
+?>
+
+                    <!-- //     <ul class="dropdown-menu my-2 " aria-labelledby="dropdownMenuLink">
+            //         <li><a class="dropdown-item " href="#">Orders</a></li>
+            //         <li><a class="dropdown-item " href="#">Action</a></li>
+            //         <li><a class="dropdown-item" href="#">Profile</a></li>
+            //         <li><a class="dropdown-item" href="./user/checkout.php">Log in</a></li>
+            //     </ul>
+            // </span> -->
+
+                    <form class="d-flex justify-content-end " action="search_product.php" method="get" role="search">
+                        <input class="ms-3 form-control " name="search_data" type="search"
+                            placeholder="Search Products..." aria-label="Search">
+                        <!-- <button class="btn btn-outline-warning" type="submit"><i class="fas fa-search"></i></button> -->
+                        <input type="submit" value="Search" name="search_product" class="btn btn-outline-warning">
+                    </form>
         </nav>
     </header>
 
@@ -91,12 +127,12 @@ while($row_data=mysqli_fetch_assoc($result_cat)){
         <div class="col-md-12">
             <div class="row">
                 <?php
-if(!isset($_SESSION['username'])){
+if(!isset($_SESSION['name'])){
    include ('SigninScreen.php');
 }else{
-    include ('./payment.php');
+  
+    include ('payment.php');
 }
-
             ?>
             </div>
         </div>

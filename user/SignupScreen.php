@@ -108,6 +108,7 @@ if(isset($_POST['signup'])){
     $user_name=$_POST['name'];
     $user_email=$_POST['email'];
     $user_password=$_POST['password'];
+    $hash_password=password_hash($user_password,PASSWORD_DEFAULT);
     $user_cpassword=$_POST['cpassword'];
     $user_address=$_POST['address'];
     $user_mobile=$_POST['mobile'];
@@ -132,7 +133,7 @@ else{
  //insert user data
  move_uploaded_file( $user_image_temp,"./user_image/$user_image");
  $insert_query="Insert into `user` (name,email,password,image,ip,address,mobile) 
- values ('$user_name','$user_email','$user_password','$user_image',' $user_ip','$user_address','$user_mobile')";
+ values ('$user_name','$user_email','$hash_password','$user_image',' $user_ip','$user_address','$user_mobile')";
  
  $result_execute=mysqli_query($connection,$insert_query);
  
@@ -141,6 +142,19 @@ else{
  }else{
      die(mysqli_error($connection));
  }
+}
+
+//selecting cart items
+$select_cart_items="Select * from `cart_details` where 
+ip_address= '$user_ip'";
+$result_cart=mysqli_query($connection,$select_cart_items);
+$row_count=mysqli_num_rows($result_cart);
+if($row_count>0){
+    $_SESSION['name']=$user_name;
+    echo "<script>alert('you have items in your cart ')</script>"; 
+    echo "<script>window.open('checkout.php','_self')</script>"; 
+}else{
+    echo "<script>window.open('index.php','_self')</script>"; 
 }
 
 }

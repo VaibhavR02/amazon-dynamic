@@ -1,6 +1,6 @@
 <?php
 include('includes/connect.php');
-
+@session_start();
 ?>
 
 
@@ -94,28 +94,70 @@ include('includes/connect.php');
 
             </li>
 
-            <span class="dropdown ">
+            <span class="dropdown ms-2">
 
-
+                <!-- 
                 <a class=" text-white text-decoration-none ms-3  dropdown-toggle " href="#" role="button"
                     id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                     User
-                </a>
+                </a> -->
 
-                <ul class="dropdown-menu my-2 " aria-labelledby="dropdownMenuLink">
+                <!-- <ul class="dropdown-menu my-2 " aria-labelledby="dropdownMenuLink">
                     <li><a class="dropdown-item " href="#">Orders</a></li>
-                    <li><a class="dropdown-item " href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Profile</a></li>
-                    <li><a class="dropdown-item" href="./user/checkout.php">Log in</a></li>
+                    <li><a class="dropdown-item " href="#">
+                            Action</a></li>
+                    <li><a class="dropdown-item" href="#">Profile</a></li> -->
+
+                <!-- ------------------------------------------------------------------------------------ -->
+                <?php
+     
+     if(!isset($_SESSION['name'])){
+       echo "  
+       <a class=' text-white text-decoration-none   dropdown-toggle ' href='#' role='button'
+                    id='dropdownMenuLink' data-bs-toggle='dropdown' aria-expanded='false'>
+                    User1
+                </a>
+       <ul class='dropdown-menu my-2 ' aria-labelledby='dropdownMenuLink'>
+       <li><a class='dropdown-item ' href='#'>Orders</a></li>
+       <li><a class='dropdown-item ' href='#'>
+               Action</a></li>
+       <li><a class='dropdown-item' href='#'>Profile</a></li>
+         
+                         <li><a class='dropdown-item' href='./user/SigninScreen.php'>Sign In</a></li>
+                     </ul>
+                 </span>
+     ";
+     }else{
+         echo "  
+         <a class=' text-white text-decoration-none ms-4  dropdown-toggle ' href='#' role='button'
+         id='dropdownMenuLink' data-bs-toggle='dropdown' aria-expanded='false'>
+        us
+     </a>
+         <ul class='dropdown-menu my-2 ' aria-labelledby='dropdownMenuLink'>
+       <li><a class='dropdown-item ' href='#'>Orders</a></li>
+       <li><a class='dropdown-item ' href='#'>
+               Action</a></li>
+       <li><a class='dropdown-item' href='#'>Profile</a></li>
+                         <li><a class='dropdown-item' href='./user/SignoutScreen.php'>Sign out</a></li>
+                     </ul>
+                 </span>
+     ";
+     }
+     ?>
+                <!-- <li><a class="dropdown-item" href="./user/checkout.php">Log in</a></li>
                 </ul>
-            </span>
-            </li>
-            <form class="d-flex " action="search_product.php" method="get" role="search">
-                <input class="form-control justify-content-end" name="search_data" type="search"
-                    placeholder="Search Products..." aria-label="Search">
-                <!-- <button class="btn btn-outline-warning" type="submit"><i class="fas fa-search"></i></button> -->
-                <input type="submit" value="Search" name="search_product" class="btn btn-outline-warning">
-            </form>
+            </span> -->
+                <!-- ------------------------------------------------------------------------------------ -->
+
+
+
+                </li>
+                <form class="d-flex " action="search_product.php" method="get" role="search">
+                    <input class="form-control justify-content-end" name="search_data" type="search"
+                        placeholder="Search Products..." aria-label="Search">
+                    <!-- <button class="btn btn-outline-warning" type="submit"><i class="fas fa-search"></i></button> -->
+                    <input type="submit" value="Search" name="search_product" class="btn btn-outline-warning">
+                </form>
         </nav>
     </header>
 

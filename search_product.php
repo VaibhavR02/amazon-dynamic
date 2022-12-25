@@ -1,6 +1,6 @@
 <?php
 include('includes/connect.php');
-
+session_start();
 ?>
 
 
@@ -21,6 +21,8 @@ include('includes/connect.php');
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
+
 </head>
 
 <body>
@@ -48,16 +50,39 @@ include('includes/connect.php');
                 <li><a class="dropdown-item " href="#">Orders</a></li>
                 <li><a class="dropdown-item " href="#">Action</a></li>
                 <li><a class="dropdown-item" href="#">Profile</a></li>
-                <li><a class="dropdown-item" href="./user/SigninScreen.php">Log in</a></li>
-            </ul>
-            </span>
-            </li>
-            <form class="d-flex " action="" method="get" role="search">
-                <input class="form-control justify-content-end" name="search_data" type="search"
-                    placeholder="Search Products..." aria-label="Search">
-                <!-- <button class="btn btn-outline-warning" type="submit"><i class="fas fa-search"></i></button> -->
-                <input type="submit" value="Search" name="search_product" class="btn btn-outline-warning">
-            </form>
+
+                <!-- ------------------------------------------------------------------------------------ -->
+                <?php
+     
+     if(!isset($_SESSION['name'])){
+       echo "  
+         
+                         <li><a class='dropdown-item' href='../user/SigninScreen.php'>Sign In</a></li>
+                     </ul>
+                 </span>
+     ";
+     }else{
+         echo "  
+         
+                         <li><a class='dropdown-item' href='./user/SignoutScreen.php'>Sign out</a></li>
+                     </ul>
+                 </span>
+     ";
+     }
+     ?>
+
+                <!-- <li><a class="dropdown-item" href="./user/checkout.php">Sign In in</a></li>
+                </ul>
+            </span> -->
+
+                <!-- ------------------------------------------------------------------------------------ -->
+                </li>
+                <form class="d-flex " action="" method="get" role="search">
+                    <input class="form-control justify-content-end" name="search_data" type="search"
+                        placeholder="Search Products..." aria-label="Search">
+                    <!-- <button class="btn btn-outline-warning" type="submit"><i class="fas fa-search"></i></button> -->
+                    <input type="submit" value="Search" name="search_product" class="btn btn-outline-warning">
+                </form>
         </nav>
     </header>
 

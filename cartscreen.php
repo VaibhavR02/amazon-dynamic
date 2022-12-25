@@ -1,6 +1,6 @@
 <?php
 include('includes/connect.php');
-
+session_start();
 ?>
 
 <?php  
@@ -66,8 +66,6 @@ echo "<script>window.open('cartscreen.php','_self')</script>";
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-
     <style>
     header .navbar-brand {
         margin-left: 0px
@@ -87,8 +85,6 @@ echo "<script>window.open('cartscreen.php','_self')</script>";
         background-color: blue;
         color: white;
     }
-    </style>
-
     </style>
 </head>
 
@@ -128,7 +124,7 @@ echo "<script>window.open('cartscreen.php','_self')</script>";
 
             </li>
 
-            <span class="dropdown ">
+            <span class="dropdown">
 
 
                 <a class=" text-white text-decoration-none ms-3  dropdown-toggle " href="#" role="button"
@@ -136,15 +132,38 @@ echo "<script>window.open('cartscreen.php','_self')</script>";
                     User
                 </a>
 
-                <ul class="dropdown-menu  " aria-labelledby="dropdownMenuLink">
+                <ul class="dropdown-menu my-2 " aria-labelledby="dropdownMenuLink">
                     <li><a class="dropdown-item " href="#">Orders</a></li>
-                    <li><a class="dropdown-item " href="#">Action</a></li>
+                    <li><a class="dropdown-item " href="#">
+                            Action</a></li>
                     <li><a class="dropdown-item" href="#">Profile</a></li>
-                    <li><a class="dropdown-item" href="signinscreen.php">Log in</a></li>
-                </ul>
-            </span>
+                    <!-- ------------------------------------------------------------------------------------ -->
+                    <?php
+     
+     if(!isset($_SESSION['name'])){
+       echo "  
+         
+                         <li><a class='dropdown-item' href='../user/SigninScreen.php'>Sign In</a></li>
+                     </ul>
+                 </span>
+     ";
+     }else{
+         echo "  
+         
+                         <li><a class='dropdown-item' href='./user/SignoutScreen.php'>Sign out</a></li>
+                     </ul>
+                 </span>
+     ";
+     }
+     ?>
 
-            </li>
+                    <!-- <li><a class="dropdown-item" href="./user/checkout.php">Sign In in</a></li>
+                </ul>
+            </span> -->
+
+                    <!-- ------------------------------------------------------------------------------------ -->
+
+                    </li>
 
         </nav>
     </header>
